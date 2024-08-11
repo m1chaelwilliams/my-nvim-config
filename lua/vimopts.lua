@@ -2,6 +2,10 @@
 vim.cmd("set number")
 vim.cmd("set relativenumber")
 
+-- stop right-shift when errors/warning appear
+vim.o.signcolumn = "yes"
+vim.o.completeopt = "menuone,noselect"
+
 -- remaps
 vim.g.mapleader = " "
 
