@@ -28,40 +28,69 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local capabilties = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
-				capabilties = capabilties,
+				capabilities = capabilities,
 			})
 			lspconfig.rust_analyzer.setup({
-				capabilties = capabilties,
+				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
-				capabilties = capabilties,
+				capabilities = capabilities,
 			})
 			lspconfig.html.setup({
-				capabilties = capabilties,
-				filetypes = { "html", "templ" },
+				capabilities = capabilities,
+				filetypes = {
+					"templ",
+					"html",
+					"css",
+					"javascriptreact",
+					"typescriptreact",
+					"javascript",
+					"typescript",
+					"jsx",
+					"tsx",
+				},
 			})
 			lspconfig.htmx.setup({
-				capabilties = capabilties,
+				capabilities = capabilities,
 				filetypes = { "html", "templ" },
 			})
 			lspconfig.emmet_language_server.setup({
-				capabilties = capabilties,
-				filetypes = { "html", "templ", "jsx", "tsx" },
+				capabilities = capabilities,
+				filetypes = {
+					"html",
+					"css",
+					"javascriptreact",
+					"typescriptreact",
+					"javascript",
+					"typescript",
+					"jsx",
+					"tsx",
+				},
 			})
 			lspconfig.tailwindcss.setup({
-				capabilties = capabilties,
-				filetypes = { "html", "templ", "tsx", "jsx" },
+				capabilities = capabilities,
+				filetypes = {
+					"templ",
+					"html",
+					"css",
+					"javascriptreact",
+					"typescriptreact",
+					"javascript",
+					"typescript",
+					"jsx",
+					"tsx",
+				},
 			})
 			lspconfig.templ.setup({
-				capabilties = capabilties,
+				capabilities = capabilities,
 				filetypes = { "templ" },
 			})
 			lspconfig.tsserver.setup({
-				capabilties = capabilties,
+				capabilties = capabilities,
 				-- filetypes = { "js", "jsx", "ts", "tsx" },
 			})
 
@@ -77,7 +106,7 @@ return {
 			end
 
 			lspconfig.pylsp.setup({
-				capabilties = capabilties,
+				capabilties = capabilities,
 				settings = {
 					python = {
 						pythonPath = get_python_path(),
