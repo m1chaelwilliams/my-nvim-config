@@ -12,6 +12,9 @@ vim.g.mapleader = " "
 
 -- neo-tree setup
 vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal right<CR>")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "Y", "yy")
 
 -- lsp setup
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
