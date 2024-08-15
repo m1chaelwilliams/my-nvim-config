@@ -2,7 +2,9 @@ return {
 	{
 		"williamboman/mason.nvim",
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+				PATH = "prepend",
+			})
 		end,
 	},
 	{
@@ -65,6 +67,7 @@ return {
 			lspconfig.emmet_language_server.setup({
 				capabilities = capabilities,
 				filetypes = {
+					"templ",
 					"html",
 					"css",
 					"javascriptreact",
