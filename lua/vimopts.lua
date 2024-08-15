@@ -7,6 +7,11 @@ vim.cmd("set ts=2")
 vim.o.signcolumn = "yes"
 vim.o.completeopt = "menuone,noselect"
 
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.bo.softtabstop = 2
+
 -- remaps
 vim.g.mapleader = " "
 

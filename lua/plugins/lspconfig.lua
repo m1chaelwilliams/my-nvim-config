@@ -21,6 +21,7 @@ return {
 					"tailwindcss",
 					"tsserver",
 					"pylsp",
+					"clangd",
 				},
 			})
 		end,
@@ -38,6 +39,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.cssls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.html.setup({
@@ -92,6 +96,26 @@ return {
 			lspconfig.tsserver.setup({
 				capabilties = capabilities,
 				-- filetypes = { "js", "jsx", "ts", "tsx" },
+			})
+
+			require("lspconfig").clangd.setup({
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--pch-storage=memory",
+					"--all-scopes-completion",
+					"--pretty",
+					"--header-insertion=never",
+					"-j=4",
+					"--inlay-hints",
+					"--header-insertion-decorators",
+					"--function-arg-placeholders",
+					"--completion-style=detailed",
+				},
+				filetypes = { "c", "cpp", "objc", "objcpp" },
+				root_dir = require("lspconfig").util.root_pattern("src"),
+				init_option = { fallbackFlags = { "-std=c++2a" } },
+				capabilities = capabilities,
 			})
 
 			function get_python_path()

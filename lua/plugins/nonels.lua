@@ -12,6 +12,7 @@ return {
 				null_ls.builtins.formatting.goimports_reviser,
 				null_ls.builtins.formatting.black,
 				null_ls.builtins.formatting.prettier,
+				null_ls.builtins.formatting.clang_format,
 			},
 			on_attach = function(client, buffer)
 				if client.supports_method("textDocument/formatting") then
