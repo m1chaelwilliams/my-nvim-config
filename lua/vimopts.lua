@@ -3,6 +3,11 @@ vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set ts=2")
 
+vim.cmd("set shell=powershell")
+vim.cmd("set shellcmdflag=-command")
+vim.cmd('set shellquote="')
+vim.cmd("set shellxquote=")
+
 -- stop right-shift when errors/warning appear
 vim.o.signcolumn = "yes"
 vim.o.completeopt = "menuone,noselect"
@@ -19,6 +24,8 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal right<CR>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-f>", "<C-f>zz")
+vim.keymap.set("n", "<C-b>", "<C-b>zz")
 vim.keymap.set("n", "Y", "yy")
 
 -- lsp setup

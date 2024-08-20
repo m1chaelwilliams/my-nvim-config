@@ -24,6 +24,8 @@ return {
 					"tsserver",
 					"pylsp",
 					"clangd",
+					"prismals",
+					"yamlls",
 				},
 			})
 		end,
@@ -44,6 +46,12 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.cssls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.prismals.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.yamlls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.html.setup({
@@ -91,6 +99,19 @@ return {
 					"jsx",
 					"tsx",
 				},
+				root_dir = require("lspconfig").util.root_pattern(
+					"tailwind.config.js",
+					"tailwind.config.cjs",
+					"tailwind.config.mjs",
+					"tailwind.config.ts",
+					"postcss.config.js",
+					"postcss.config.cjs",
+					"postcss.config.mjs",
+					"postcss.config.ts",
+					"package.json",
+					"node_modules",
+					".git"
+				),
 			})
 			lspconfig.templ.setup({
 				capabilities = capabilities,
