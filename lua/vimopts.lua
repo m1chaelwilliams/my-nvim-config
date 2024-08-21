@@ -39,5 +39,5 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 
 -- disable default errors
 vim.diagnostic.config({
-	virtual_text = false,
+  virtual_text = false,
 })
