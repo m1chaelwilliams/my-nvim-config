@@ -2,6 +2,7 @@
 vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set ts=2")
+vim.cmd("set cmdheight=0")
 
 vim.cmd("set shell=powershell")
 vim.cmd("set shellcmdflag=-command")
@@ -10,15 +11,22 @@ vim.cmd("set shellxquote=")
 
 -- stop right-shift when errors/warning appear
 vim.o.signcolumn = "yes"
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = "menuone,noselect,preview"
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.bo.softtabstop = 2
 
+-- move selections
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Shift visual selected line down
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- Shift visual selected line up
+
 -- remaps
 vim.g.mapleader = " "
+
+-- zig
+-- vim.g.zig_fmt_autosave = 0
 
 -- neo-tree setup
 vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal right<CR>")
@@ -39,5 +47,20 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 
 -- disable default errors
 vim.diagnostic.config({
-  virtual_text = false,
+	virtual_text = false,
 })
+
+function leave_snippet()
+	if
+		((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
+		and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+		and not require("luasnip").session.jump_active
+	then
+		require("luasnip").unlink_current()
+	end
+end
+
+-- stop snippets when you leave to normal mode
+vim.api.nvim_command([[
+    autocmd ModeChanged * lua leave_snippet()
+]])

@@ -5,6 +5,21 @@ return {
 		tag = "0.1.8",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
+			require("telescope").setup({
+				pickers = {
+					find_files = {
+						hidden = true,
+						find_command = {
+							"rg",
+							"--files",
+							"--glob",
+							"!{.git/*,.next/*,.svelte-kit/*,target/*,node_modules/*}",
+							"--path-separator",
+							"/",
+						},
+					},
+				},
+			})
 			-- telescope setup
 			local builtin = require("telescope.builtin")
 			-- vim.keymap.set("n", "<C-p>", builtin.find_files, {})
@@ -15,6 +30,7 @@ return {
 				"<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
 				{}
 			)
+			vim.keymap.set("n", "<leader>fb", ":Telescope file_browser<cr>", {})
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 		end,
 	},

@@ -26,6 +26,10 @@ return {
 					"clangd",
 					"prismals",
 					"yamlls",
+					"jsonls",
+					"eslint",
+					"hls",
+					"zls",
 				},
 			})
 		end,
@@ -36,10 +40,39 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local lspconfig = require("lspconfig")
+			lspconfig.zls.setup({
+				capabilities = capabilities,
+				cmd = { "zls" },
+			})
+			lspconfig.hls.setup({
+				capabilities = capabilities,
+				on_attach = function()
+					vim.cmd([[
+        augroup LspFormatting
+          autocmd! * <buffer>
+          autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
+        augroup END
+      ]])
+				end,
+			})
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.rust_analyzer.setup({
+				capabilities = capabilities,
+				settings = {
+					["rust-analyzer"] = {
+						cargo = {
+							allFeatures = true,
+						},
+						checkOnSave = {
+							command = "clippy",
+						},
+					},
+				},
+				root_dir = require("lspconfig").util.root_pattern("cargo.toml", "cargo.lock", ".git"),
+			})
+			lspconfig.jsonls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
@@ -120,6 +153,9 @@ return {
 			lspconfig.tsserver.setup({
 				capabilties = capabilities,
 				-- filetypes = { "js", "jsx", "ts", "tsx" },
+			})
+			lspconfig.eslint.setup({
+				capabilties = capabilities,
 			})
 
 			require("lspconfig").clangd.setup({
