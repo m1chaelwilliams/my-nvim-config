@@ -150,7 +150,7 @@ return {
 				capabilities = capabilities,
 				filetypes = { "templ" },
 			})
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				capabilties = capabilities,
 				-- filetypes = { "js", "jsx", "ts", "tsx" },
 			})

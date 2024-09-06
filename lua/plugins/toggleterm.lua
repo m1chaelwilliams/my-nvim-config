@@ -2,6 +2,6 @@ return {
   "akinsho/toggleterm.nvim",
   config = function()
     require("toggleterm").setup({})
-    vim.keymap.set("n", "<leader>m", ":ToggleTerm<CR>")
+    vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>")
   end,
 }
