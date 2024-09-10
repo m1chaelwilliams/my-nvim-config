@@ -68,6 +68,7 @@ return {
 				func = "#bc96b0",
 				keyword = "#787bab",
 				string = "#d4bd98",
+				-- string = "#d8d5b1",
 				fg = "#d6d2c8",
 				-- type = "#dcaed7",
 			},

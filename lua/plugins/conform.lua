@@ -10,14 +10,21 @@ return {
 				javascriptreact = { "prettier", stop_after_first = true },
 				typescript = { "prettier", stop_after_first = true },
 				typescriptreact = { "prettier", stop_after_first = true },
-				go = { "gofumpt", "golines", "goimports_reviser" },
+				go = { "gofumpt", "golines", "goimports-reviser" },
 				c = { "clang_format" },
 				cpp = { "clang_format" },
 				haskell = { "ormolu" },
 				yaml = { "yamlfmt" },
+				-- templ = { "prettier" },
+				html = { "prettier" },
+				json = { "prettier" },
+				markdown = { "prettier" },
+				gleam = { "gleam" },
+				sql = { "sqlfmt" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
+				lsp_format = "fallback",
 			},
 		})
 

@@ -21,7 +21,7 @@ return {
 					"emmet_language_server",
 					"htmx",
 					"tailwindcss",
-					"tsserver",
+					"ts_ls",
 					"pylsp",
 					"clangd",
 					"prismals",
@@ -30,6 +30,8 @@ return {
 					"eslint",
 					"hls",
 					"zls",
+					"marksman",
+					"sqlls",
 				},
 			})
 		end,
@@ -196,6 +198,13 @@ return {
 						pythonPath = get_python_path(),
 					},
 				},
+			})
+
+			lspconfig.marksman.setup({
+				capabilties = capabilities,
+			})
+			lspconfig.gleam.setup({
+				capabilties = capabilities,
 			})
 		end,
 	},

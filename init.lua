@@ -19,8 +19,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_opts = {}
-
 -- vim opts
 require("vimopts")
 -- lazy.nvim setup
@@ -43,6 +41,9 @@ config.setup({
 		"prisma",
 		"haskell",
 		"zig",
+		"latex",
+		"gleam",
+		"sql",
 	},
 	highlight = { enable = true },
 	indent = { enable = true },
@@ -53,3 +54,13 @@ vim.filetype.add({ extension = { templ = "templ" } })
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#646477" })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#646477" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
+
+vim.api.nvim_create_augroup("rust_mappings", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "rust",
+	group = "rust_mappings",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(0, "n", "<leader>b", "a||<Esc>i", { noremap = true, silent = true })
+	end,
+})

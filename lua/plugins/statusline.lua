@@ -1,6 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "echasnovski/mini.icons" },
 	config = function()
 		local custom_iceberk_dark = require("lualine.themes.iceberg_dark")
 		-- custom_iceberk_dark.normal.c.bg = "#080808" -- archiving bc this is my term bg

@@ -3,6 +3,7 @@ vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set ts=2")
 vim.cmd("set cmdheight=0")
+vim.cmd("set termguicolors")
 
 vim.cmd("set shell=powershell")
 vim.cmd("set shellcmdflag=-command")
@@ -29,7 +30,11 @@ vim.g.mapleader = " "
 -- vim.g.zig_fmt_autosave = 0
 
 -- neo-tree setup
-vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal right<CR>")
+-- vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal right<CR>")
+
+-- oil.nvim setup
+vim.keymap.set("n", "<leader>N", ":Oil<CR>")
+vim.keymap.set("n", "<leader>n", ':lua require("oil").toggle_float()<CR>')
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<C-f>", "<C-f>zz")
