@@ -2,6 +2,12 @@
 
 -- entry point of nvim
 
+-- make help and man open up on the side instead above
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "help", "man" },
+	command = "wincmd L",
+})
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

@@ -3,8 +3,7 @@
 A very simple Neovim configuration.
 
 _These preview are outdated, it looks better now_
-![preview](./assets/preview.gif)
-![preview](./assets/preview2.gif)
+![preview](./assets/nvim-config.png)
 
 ## File Structure
 
