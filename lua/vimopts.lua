@@ -5,7 +5,7 @@ vim.cmd("set ts=2")
 vim.cmd("set cmdheight=0")
 vim.cmd("set termguicolors")
 
-vim.cmd("set shell=powershell")
+vim.cmd("set shell=bash")
 vim.cmd("set shellcmdflag=-command")
 vim.cmd('set shellquote="')
 vim.cmd("set shellxquote=")
