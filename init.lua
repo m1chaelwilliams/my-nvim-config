@@ -2,6 +2,10 @@
 
 -- entry point of nvim
 
+if vim.g.neovide then
+	vim.o.guifont = "Iosevka Custom"
+end
+
 -- make help and man open up on the side instead above
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "help", "man" },
@@ -28,7 +32,11 @@ vim.opt.rtp:prepend(lazypath)
 -- vim opts
 require("vimopts")
 -- lazy.nvim setup
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+	default = {
+		lazy = true,
+	},
+})
 
 -- treesitter config
 local config = require("nvim-treesitter.configs")
@@ -50,6 +58,7 @@ config.setup({
 		"latex",
 		"gleam",
 		"sql",
+		"wgsl",
 	},
 	highlight = { enable = true },
 	indent = { enable = true },

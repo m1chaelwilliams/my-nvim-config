@@ -32,6 +32,7 @@ return {
 					"zls",
 					"marksman",
 					"sqlls",
+					"wgsl_analyzer",
 				},
 			})
 		end,
@@ -48,31 +49,34 @@ return {
 			})
 			lspconfig.hls.setup({
 				capabilities = capabilities,
-				on_attach = function()
-					vim.cmd([[
-        augroup LspFormatting
-          autocmd! * <buffer>
-          autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-        augroup END
-      ]])
-				end,
+				-- on_attach = function()
+				-- 	vim.cmd([[
+				--     augroup LspFormatting
+				--       autocmd! * <buffer>
+				--       autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
+				--     augroup END
+				--   ]])
+				-- end,
 			})
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.rust_analyzer.setup({
+			-- lspconfig.rust_analyzer.setup({
+			-- 	capabilities = capabilities,
+			-- 	settings = {
+			-- 		["rust-analyzer"] = {
+			-- 			cargo = {
+			-- 				allFeatures = true,
+			-- 			},
+			-- 			checkOnSave = {
+			-- 				command = "clippy",
+			-- 			},
+			-- 		},
+			-- 	},
+			-- 	root_dir = require("lspconfig").util.root_pattern("cargo.toml", "cargo.lock", ".git"),
+			-- })
+			lspconfig.wgsl_analyzer.setup({
 				capabilities = capabilities,
-				settings = {
-					["rust-analyzer"] = {
-						cargo = {
-							allFeatures = true,
-						},
-						checkOnSave = {
-							command = "clippy",
-						},
-					},
-				},
-				root_dir = require("lspconfig").util.root_pattern("cargo.toml", "cargo.lock", ".git"),
 			})
 			lspconfig.jsonls.setup({
 				capabilities = capabilities,
@@ -154,7 +158,13 @@ return {
 			})
 			lspconfig.ts_ls.setup({
 				capabilties = capabilities,
-				-- filetypes = { "js", "jsx", "ts", "tsx" },
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+					"html",
+				},
 			})
 			lspconfig.eslint.setup({
 				capabilties = capabilities,

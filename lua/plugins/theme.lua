@@ -67,9 +67,11 @@ return {
 			colors = {
 				func = "#bc96b0",
 				keyword = "#787bab",
-				string = "#d4bd98",
+				-- string = "#d4bd98",
+				-- string = "#f2e6ff",
+				-- number = "#f2e6ff",
 				-- string = "#d8d5b1",
-				fg = "#d6d2c8",
+				-- number = "#d2a374",
 				-- type = "#dcaed7",
 			},
 		})
