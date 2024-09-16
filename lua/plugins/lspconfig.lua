@@ -170,52 +170,52 @@ return {
 				capabilties = capabilities,
 			})
 
-			require("lspconfig").clangd.setup({
-				cmd = {
-					"clangd",
-					"--background-index",
-					"--pch-storage=memory",
-					"--all-scopes-completion",
-					"--pretty",
-					"--header-insertion=never",
-					"-j=4",
-					"--inlay-hints",
-					"--header-insertion-decorators",
-					"--function-arg-placeholders",
-					"--completion-style=detailed",
-				},
-				filetypes = { "c", "cpp", "objc", "objcpp" },
-				root_dir = require("lspconfig").util.root_pattern("src"),
-				init_option = { fallbackFlags = { "-std=c++2a" } },
-				capabilities = capabilities,
-			})
+      require("lspconfig").clangd.setup({
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--pch-storage=memory",
+          "--all-scopes-completion",
+          "--pretty",
+          "--header-insertion=never",
+          "-j=4",
+          "--inlay-hints",
+          "--header-insertion-decorators",
+          "--function-arg-placeholders",
+          "--completion-style=detailed",
+        },
+        filetypes = { "c", "cpp", "objc", "objcpp" },
+        root_dir = require("lspconfig").util.root_pattern("src"),
+        init_option = { fallbackFlags = { "-std=c++2a" } },
+        capabilities = capabilities,
+      })
 
-			function get_python_path()
-				-- Check if there's an active virtual environment
-				local venv_path = os.getenv("VIRTUAL_ENV")
-				if venv_path then
-					return venv_path .. "/bin/python"
-				else
-					-- Fallback to global Python interpreter
-					return "C:/Python312" -- Or the path to your global Python interpreter
-				end
-			end
+      function get_python_path()
+        -- Check if there's an active virtual environment
+        local venv_path = os.getenv("VIRTUAL_ENV")
+        if venv_path then
+          return venv_path .. "/bin/python3"
+        else
+          -- Fallback to global Python interpreter
+          return "/usr/bin/python3" -- Or the path to your global Python interpreter
+        end
+      end
 
-			lspconfig.pylsp.setup({
-				capabilties = capabilities,
-				settings = {
-					python = {
-						pythonPath = get_python_path(),
-					},
-				},
-			})
+      lspconfig.pylsp.setup({
+        capabilties = capabilities,
+        settings = {
+          python = {
+            pythonPath = get_python_path(),
+          },
+        },
+      })
 
-			lspconfig.marksman.setup({
-				capabilties = capabilities,
-			})
-			lspconfig.gleam.setup({
-				capabilties = capabilities,
-			})
-		end,
-	},
+      lspconfig.marksman.setup({
+        capabilties = capabilities,
+      })
+      lspconfig.gleam.setup({
+        capabilties = capabilities,
+      })
+    end,
+  },
 }
