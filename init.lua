@@ -59,6 +59,7 @@ config.setup({
 		"gleam",
 		"sql",
 		"wgsl",
+		"asm",
 	},
 	highlight = { enable = true },
 	indent = { enable = true },

@@ -21,6 +21,7 @@ return {
 				markdown = { "prettier" },
 				gleam = { "gleam" },
 				sql = { "sqlfmt" },
+				asm = { "asmfmt" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
