@@ -5,7 +5,14 @@ vim.cmd("set ts=2")
 vim.cmd("set cmdheight=0")
 vim.cmd("set termguicolors")
 
-vim.cmd("set shell=powershell")
+local utils = require("utils")
+local os_name = utils.get_os()
+
+if os_name == "windows" then
+	vim.cmd("set shell=powershell")
+else
+	vim.cmd("set shell=/bin/zsh")
+end
 vim.cmd("set shellcmdflag=-c")
 vim.cmd("set shellquote=")
 vim.cmd("set shellxquote=")

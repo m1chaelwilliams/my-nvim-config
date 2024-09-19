@@ -1,9 +1,5 @@
 -- Hi Michael !
 
-local utils = require("utils")
-
-local os_name = utils.get_os()
-
 -- FIXME: this is a workaround for inconsistent file opening behavior on Windows
 if vim.fn.has("win32") then
 	local ori_fnameescape = vim.fn.fnameescape
