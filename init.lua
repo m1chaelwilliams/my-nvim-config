@@ -1,42 +1,63 @@
 -- Hi Michael !
 
+
+
+
+-- FIXME: this is a workaround for inconsistent file opening behavior on Windows
+if vim.fn.has("win32") then
+  local ori_fnameescape = vim.fn.fnameescape
+  ---@diagnostic disable-next-line: duplicate-set-field
+  vim.fn.fnameescape = function(...)
+    local result = ori_fnameescape(...)
+    return result:gsub("\\", "/")
+  end
+end
+
 -- entry point of nvim
 
 if vim.g.neovide then
-	vim.o.guifont = "Iosevka Custom"
+  vim.o.guifont = "Iosevka Custom"
 end
 
 -- make help and man open up on the side instead above
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "help", "man" },
-	command = "wincmd L",
+  pattern = { "help", "man" },
+  command = "wincmd L",
 })
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out,                            "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
 -- vim opts
 require("vimopts")
+
+
 -- lazy.nvim setup
 require("lazy").setup("plugins", {
-	default = {
-		lazy = true,
-	},
+  default = {
+    lazy = true,
+  },
 })
+
+-- theme
+vim.cmd("colorscheme base16-black-metal-gorgoroth")
+-- vim.cmd("colorscheme vague")
+
+-- custom status line stuff
 
 -- treesitter config
 local config = require("nvim-treesitter.configs")
@@ -67,18 +88,23 @@ config.setup({
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#646477" })
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#646477" })
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
+local set_line_numbers = function()
+  vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#646477" })
+  vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#646477" })
+  vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
+end
+
+set_line_numbers()
+vim.api.nvim_create_user_command("VagueLine", set_line_numbers, {})
 
 vim.api.nvim_create_augroup("rust_mappings", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "rust",
-	group = "rust_mappings",
-	callback = function()
-		vim.api.nvim_buf_set_keymap(0, "n", "<leader>b", "a||<Esc>i", { noremap = true, silent = true })
-	end,
+  pattern = "rust",
+  group = "rust_mappings",
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, "n", "<leader>b", "a||<Esc>i", { noremap = true, silent = true })
+  end,
 })
 
 -- for dashboard
