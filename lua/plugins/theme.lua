@@ -102,4 +102,8 @@ return {
   {
     "ellisonleao/gruvbox.nvim"
   },
+  {
+    "RRethy/base16-nvim",
+  },
+
 }

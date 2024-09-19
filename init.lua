@@ -44,14 +44,20 @@ vim.opt.rtp:prepend(lazypath)
 
 -- vim opts
 require("vimopts")
+
+
 -- lazy.nvim setup
 require("lazy").setup("plugins", {
   default = {
     lazy = true,
   },
 })
+
 -- theme
-vim.cmd("colorscheme vague")
+vim.cmd("colorscheme base16-black-metal-gorgoroth")
+-- vim.cmd("colorscheme vague")
+
+-- custom status line stuff
 
 -- treesitter config
 local config = require("nvim-treesitter.configs")
@@ -81,9 +87,14 @@ config.setup({
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#646477" })
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#646477" })
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
+local set_line_numbers = function()
+  vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#646477" })
+  vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#646477" })
+  vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
+end
+
+set_line_numbers()
+vim.api.nvim_create_user_command("VagueLine", set_line_numbers, {})
 
 vim.api.nvim_create_augroup("rust_mappings", { clear = true })
 
