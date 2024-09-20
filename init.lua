@@ -47,9 +47,35 @@ require("lazy").setup("plugins", {
 })
 
 -- theme
-vim.cmd("colorscheme base16-black-metal-gorgoroth")
--- vim.cmd("colorscheme vague")
+-- vim.cmd("colorscheme base16-black-metal-gorgoroth")
+vim.cmd("colorscheme zenburn")
 
+local vague_status = function()
+	local custom_iceberk_dark = require("lualine.themes.iceberg_dark")
+	-- custom_iceberk_dark.normal.c.bg = "#080808" -- archiving bc this is my term bg
+	custom_iceberk_dark.normal.c.bg = nil
+	custom_iceberk_dark.inactive.b.bg = nil
+	custom_iceberk_dark.inactive.a.bg = nil
+	custom_iceberk_dark.inactive.c.bg = nil
+	custom_iceberk_dark.insert.a.bg = "#bc96b0"
+	custom_iceberk_dark.visual.a.bg = "#787bab"
+	custom_iceberk_dark.replace.a.bg = "#a1b3b9"
+
+	require("lualine").setup({
+		options = {
+			-- theme = "seoul256"
+			theme = custom_iceberk_dark,
+		},
+	})
+end
+vim.api.nvim_create_user_command("VagueStatus", vague_status, {})
+vim.api.nvim_create_user_command("DefStatus", function()
+	require("lualine").setup({ options = { theme = "auto" } })
+end, {})
+
+if vim.g.colors_name == "vague" then
+	vague_status()
+end
 -- custom status line stuff
 
 -- treesitter config

@@ -185,7 +185,7 @@ return {
 					-- get os name
 					local os_name = require("utils").get_os()
 					-- get os interpreter path
-					if os_name == "Windows_NT" then
+					if os_name == "windows" then
 						return "C:/python312"
 					elseif os_name == "linux" then
 						return "/usr/bin/python3"
