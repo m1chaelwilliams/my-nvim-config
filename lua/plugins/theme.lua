@@ -1,46 +1,3 @@
--- return {
---   "owickstrom/vim-colors-paramount",
---   config = function()
---     vim.cmd("colorscheme paramount")
---   end,
---   opts = {
---     italic = false,
---   }
--- }
-
--- kanagawa theme
--- return {
--- 	"rebelot/kanagawa.nvim",
--- 	name = "kanagawa",
--- 	priority = 1000,
--- 	config = function()
--- 		require("kanagawa").setup({
--- 			keywordStyle = { italic = false },
--- 			colors = {
--- 				theme = {
--- 					all = {
--- 						ui = {
--- 							bg_gutter = "none",
--- 						},
--- 					},
--- 				},
--- 			},
--- 		})
---
--- 		-- set the colorscheme
--- 		vim.cmd("colorscheme kanagawa-dragon")
--- 	end,
--- }
---
--- Lazy
--- return {
--- 	"embark-theme/vim",
--- 	config = function()
--- 		vim.cmd("colorscheme embark")
--- 	end,
--- }
---
-
 return {
 	{
 		"vague2k/vague.nvim",
@@ -90,35 +47,9 @@ return {
 		end,
 	},
 	{
-		"slugbyte/lackluster.nvim",
-		config = function()
-			require("lackluster").setup({
-				tweak_background = {
-					normal = "none",
-					telescope = "none",
-					menu = "none",
-					popup = "none",
-				},
-			})
-		end,
-	},
-	{
 		"jnurmine/Zenburn",
 	},
 	{
-		"ellisonleao/gruvbox.nvim",
-	},
-	{
 		"RRethy/base16-nvim",
-	},
-	{
-		"archseer/colibri.vim",
-	},
-	{
-		"zenbones-theme/zenbones.nvim",
-		dependencies = { "rktjmp/lush.nvim" },
-	},
-	{
-		"atelierbram/Base2Tone-nvim",
 	},
 }

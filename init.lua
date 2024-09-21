@@ -1,14 +1,8 @@
 -- Hi Michael !
 
--- FIXME: this is a workaround for inconsistent file opening behavior on Windows
-if vim.fn.has("win32") then
-	local ori_fnameescape = vim.fn.fnameescape
-	---@diagnostic disable-next-line: duplicate-set-field
-	vim.fn.fnameescape = function(...)
-		local result = ori_fnameescape(...)
-		return result:gsub("\\", "/")
-	end
-end
+local utils = require("utils")
+
+utils.fix_telescope_parens_win()
 
 -- make help and man open up on the side instead above
 vim.api.nvim_create_autocmd("FileType", {
@@ -47,36 +41,25 @@ require("lazy").setup("plugins", {
 })
 
 -- theme
--- vim.cmd("colorscheme base16-black-metal-gorgoroth")
-vim.cmd("colorscheme zenburn")
+-- vim.cmd("colorscheme vague")
+vim.cmd("colorscheme base16-black-metal-gorgoroth")
+if vim.g.colors_name == "vague" then
+	utils.color_overrides.vague_line_colors()
+	utils.color_overrides.vague_status_colors()
+elseif vim.g.colors_name == "base16-black-metal-gorgoroth" then
+	vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#710000" })
+	vim.api.nvim_set_hl(0, "TSComment", { fg = "#555555", gui = nil })
 
-local vague_status = function()
-	local custom_iceberk_dark = require("lualine.themes.iceberg_dark")
-	-- custom_iceberk_dark.normal.c.bg = "#080808" -- archiving bc this is my term bg
-	custom_iceberk_dark.normal.c.bg = nil
-	custom_iceberk_dark.inactive.b.bg = nil
-	custom_iceberk_dark.inactive.a.bg = nil
-	custom_iceberk_dark.inactive.c.bg = nil
-	custom_iceberk_dark.insert.a.bg = "#bc96b0"
-	custom_iceberk_dark.visual.a.bg = "#787bab"
-	custom_iceberk_dark.replace.a.bg = "#a1b3b9"
-
-	require("lualine").setup({
-		options = {
-			-- theme = "seoul256"
-			theme = custom_iceberk_dark,
-		},
-	})
+	vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#888888", bg = "#1e1e1e" })
+	vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#888888", bg = "#1e1e1e" })
+	vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
 end
-vim.api.nvim_create_user_command("VagueStatus", vague_status, {})
+
+vim.api.nvim_create_user_command("VagueStatus", utils.color_overrides.vague_status_colors, {})
+vim.api.nvim_create_user_command("VagueLine", utils.color_overrides.vague_line_colors, {})
 vim.api.nvim_create_user_command("DefStatus", function()
 	require("lualine").setup({ options = { theme = "auto" } })
 end, {})
-
-if vim.g.colors_name == "vague" then
-	vague_status()
-end
--- custom status line stuff
 
 -- treesitter config
 local config = require("nvim-treesitter.configs")
@@ -107,18 +90,7 @@ config.setup({
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
--- sets custom line number colors
-local set_line_numbers = function()
-	vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#646477" })
-	vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#646477" })
-	vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
-end
-
-set_line_numbers()
-vim.api.nvim_create_user_command("VagueLine", set_line_numbers, {})
-
 -- for dashboard
-
 vim.api.nvim_set_hl(0, "I2A0", { fg = "#1f3670" })
 vim.api.nvim_set_hl(0, "I2A1", { fg = "#e6eff3" })
 vim.api.nvim_set_hl(0, "I2A2", { fg = "#f2f7fa" })

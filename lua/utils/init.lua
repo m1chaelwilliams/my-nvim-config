@@ -1,5 +1,7 @@
 local utils = {}
 
+utils.color_overrides = require("utils.color_overrides")
+
 --- get the operating system name
 --- "windows", "mac", "linux"
 function utils.get_os()
@@ -11,6 +13,18 @@ function utils.get_os()
 		return "mac"
 	else
 		return "linux"
+	end
+end
+
+-- fixes parenthesis issue with directories and telescope
+function utils.fix_telescope_parens_win()
+	if vim.fn.has("win32") then
+		local ori_fnameescape = vim.fn.fnameescape
+		---@diagnostic disable-next-line: duplicate-set-field
+		vim.fn.fnameescape = function(...)
+			local result = ori_fnameescape(...)
+			return result:gsub("\\", "/")
+		end
 	end
 end
 

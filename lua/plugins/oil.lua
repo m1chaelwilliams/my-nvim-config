@@ -34,6 +34,10 @@ return {
 				["g."] = "actions.toggle_hidden",
 				["g\\"] = "actions.toggle_trash",
 			},
+			float = {
+				padding = 5,
+				border = "rounded",
+			},
 		})
 	end,
 }
