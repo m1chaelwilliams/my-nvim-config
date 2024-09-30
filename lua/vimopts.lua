@@ -4,6 +4,9 @@ vim.cmd("set relativenumber")
 vim.cmd("set ts=2")
 vim.cmd("set cmdheight=0")
 vim.cmd("set termguicolors")
+vim.cmd("set scrolloff=5")
+
+vim.cmd("set guicursor=n-v-c:block-blinkon1,i-ci:ver25")
 
 local utils = require("utils")
 local os_name = utils.get_os()

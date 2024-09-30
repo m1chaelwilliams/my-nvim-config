@@ -35,7 +35,7 @@ return {
 				["g\\"] = "actions.toggle_trash",
 			},
 			float = {
-				padding = 5,
+				padding = 3,
 				border = "rounded",
 			},
 		})

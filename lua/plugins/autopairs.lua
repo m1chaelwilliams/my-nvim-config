@@ -1,4 +1,4 @@
-local autopairsconfig = {
+return {
 	"windwp/nvim-autopairs",
 	event = "InsertEnter",
 	config = function()
@@ -7,5 +7,3 @@ local autopairsconfig = {
 	end,
 	opts = {},
 }
-
-return autopairsconfig

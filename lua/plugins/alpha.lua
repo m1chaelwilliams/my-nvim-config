@@ -7,8 +7,6 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
-		-- local dashboard = require("alpha.themes.startify") -- the old one i used
-		--
 
 		dashboard.section.header.opts.hl = {
 			{
@@ -501,8 +499,8 @@ return {
 			dashboard.button("b", "  > Browse files", ":Oil --float<CR>"),
 			dashboard.button("f", "󰈞  > Find file", ":Telescope find_files<CR>"),
 			dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>"),
-			dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"),
-			dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
+			-- dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"),
+			-- dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
 		}
 
 		alpha.setup(dashboard.opts)
