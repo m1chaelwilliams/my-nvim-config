@@ -4,24 +4,24 @@ local utils = require("utils")
 utils.fix_telescope_parens_win()
 -- make help and man open up on the side instead above
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "help", "man" },
-	command = "wincmd L",
+  pattern = { "help", "man" },
+  command = "wincmd L",
 })
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out,                            "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -32,58 +32,58 @@ require("mappings")
 
 -- lazy.nvim setup
 require("lazy").setup("plugins", {
-	default = {
-		lazy = true,
-	},
+  default = {
+    lazy = true,
+  },
 })
 
 -- theme
 -- vim.cmd("colorscheme vague")
 vim.cmd("colorscheme base16-black-metal-gorgoroth")
 if vim.g.colors_name == "vague" then
-	utils.color_overrides.vague_line_colors()
-	utils.color_overrides.vague_status_colors()
+  utils.color_overrides.vague_line_colors()
+  utils.color_overrides.vague_status_colors()
 elseif vim.g.colors_name == "base16-black-metal-gorgoroth" then
-	vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#912222" })
-	vim.api.nvim_set_hl(0, "TSComment", { fg = "#555555", gui = nil })
-	vim.api.nvim_set_hl(0, "Visual", { bg = "#8c7f70", fg = "#d6d2c8" })
+  vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#912222" })
+  vim.api.nvim_set_hl(0, "TSComment", { fg = "#555555", gui = nil })
+  vim.api.nvim_set_hl(0, "Visual", { bg = "#8c7f70", fg = "#d6d2c8" })
 
-	vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#888888", bg = "#1e1e1e" })
-	vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#888888", bg = "#1e1e1e" })
-	vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
+  vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#888888", bg = "#1e1e1e" })
+  vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#888888", bg = "#1e1e1e" })
+  vim.api.nvim_set_hl(0, "LineNr", { fg = "#d6d2c8" })
 end
 
 vim.api.nvim_create_user_command("VagueStatus", utils.color_overrides.vague_status_colors, {})
 vim.api.nvim_create_user_command("VagueLine", utils.color_overrides.vague_line_colors, {})
 vim.api.nvim_create_user_command("DefStatus", function()
-	require("lualine").setup({ options = { theme = "auto" } })
+  require("lualine").setup({ options = { theme = "auto" } })
 end, {})
 
 -- treesitter config
 local config = require("nvim-treesitter.configs")
 config.setup({
-	ensure_installed = {
-		"go",
-		"rust",
-		"c",
-		"lua",
-		"python",
-		"html",
-		"css",
-		"javascript",
-		"typescript",
-		"templ",
-		"prisma",
-		"haskell",
-		"zig",
-		"latex",
-		"gleam",
-		"sql",
-		"wgsl",
-		"asm",
-	},
-	highlight = { enable = true },
-	indent = { enable = true },
+  ensure_installed = {
+    "go",
+    "rust",
+    "c",
+    "lua",
+    "python",
+    "html",
+    "css",
+    "javascript",
+    "typescript",
+    "templ",
+    "prisma",
+    "haskell",
+    "zig",
+    "latex",
+    "gleam",
+    "sql",
+    "wgsl",
+    "asm",
+  },
+  highlight = { enable = true },
+  indent = { enable = true },
 })
 
 vim.filetype.add({ extension = { templ = "templ" } })

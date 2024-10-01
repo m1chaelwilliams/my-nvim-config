@@ -7,8 +7,8 @@ vim.cmd("set termguicolors")
 vim.cmd("set scrolloff=5")
 
 -- window manips
-vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
-vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]])   -- make the window biger vertically
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]])   -- make the window smaller vertically
 vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
 vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
 
@@ -18,9 +18,9 @@ local utils = require("utils")
 local os_name = utils.get_os()
 
 if os_name == "windows" then
-	vim.cmd("set shell=powershell")
+  vim.cmd("set shell=powershell")
 else
-	vim.cmd("set shell=/bin/zsh")
+  vim.cmd("set shell=/bin/zsh")
 end
 vim.cmd("set shellcmdflag=-c")
 vim.cmd("set shellquote=")
@@ -60,53 +60,57 @@ vim.keymap.set("n", "<C-f>", "<C-f>zz")
 vim.keymap.set("n", "<C-b>", "<C-b>zz")
 vim.keymap.set("n", "Y", "yy")
 
+-- autocomplete in normal text
+vim.keymap.set("i", "<C-f>", "<C-x><C-f>", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-l>", "<C-x><C-n>", { noremap = true, silent = true })
+
 -- lsp setup
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 vim.keymap.set("n", "gr", function()
-	-- Trigger the LSP references function and populate the quickfix list
-	vim.lsp.buf.references()
+  -- Trigger the LSP references function and populate the quickfix list
+  vim.lsp.buf.references()
 
-	vim.defer_fn(function()
-		print("getting qf list")
-		-- Set up an autocmd to remap keys in the quickfix window
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "qf", -- Only apply this mapping in quickfix windows
-			callback = function()
-				-- Remap <Enter> to jump to the location and close the quickfix window
-				vim.api.nvim_buf_set_keymap(0, "n", "<CR>", "<CR>:cclose<CR>", { noremap = true, silent = true })
+  vim.defer_fn(function()
+    print("getting qf list")
+    -- Set up an autocmd to remap keys in the quickfix window
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "qf", -- Only apply this mapping in quickfix windows
+      callback = function()
+        -- Remap <Enter> to jump to the location and close the quickfix window
+        vim.api.nvim_buf_set_keymap(0, "n", "<CR>", "<CR>:cclose<CR>", { noremap = true, silent = true })
 
-				-- Set up <Tab> to cycle through quickfix list entries
-				vim.keymap.set("n", "<Tab>", function()
-					local current_idx = vim.fn.getqflist({ idx = 0 }).idx
-					local qflist = vim.fn.getqflist() -- Get the current quickfix list
-					if current_idx >= #qflist then
-						print("going to first element")
-						vim.cmd("cfirst")
-						vim.cmd("wincmd p")
-					else
-						print("going to next item")
-						vim.cmd("cnext")
-						vim.cmd("wincmd p")
-					end
-				end, { noremap = true, silent = true, buffer = 0 })
+        -- Set up <Tab> to cycle through quickfix list entries
+        vim.keymap.set("n", "<Tab>", function()
+          local current_idx = vim.fn.getqflist({ idx = 0 }).idx
+          local qflist = vim.fn.getqflist() -- Get the current quickfix list
+          if current_idx >= #qflist then
+            print("going to first element")
+            vim.cmd("cfirst")
+            vim.cmd("wincmd p")
+          else
+            print("going to next item")
+            vim.cmd("cnext")
+            vim.cmd("wincmd p")
+          end
+        end, { noremap = true, silent = true, buffer = 0 })
 
-				vim.keymap.set("n", "<S-Tab>", function()
-					local current_idx = vim.fn.getqflist({ idx = 0 }).idx
-					if current_idx < 2 then
-						print("going to first element")
-						vim.cmd("clast")
-						vim.cmd("wincmd p")
-					else
-						print("going to next item")
-						vim.cmd("cprev")
-						vim.cmd("wincmd p")
-					end
-				end, { noremap = true, silent = true, buffer = 0 })
-			end,
-		})
-	end, 0)
+        vim.keymap.set("n", "<S-Tab>", function()
+          local current_idx = vim.fn.getqflist({ idx = 0 }).idx
+          if current_idx < 2 then
+            print("going to first element")
+            vim.cmd("clast")
+            vim.cmd("wincmd p")
+          else
+            print("going to next item")
+            vim.cmd("cprev")
+            vim.cmd("wincmd p")
+          end
+        end, { noremap = true, silent = true, buffer = 0 })
+      end,
+    })
+  end, 0)
 end)
 
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
@@ -122,17 +126,17 @@ vim.keymap.set("n", "]e", vim.diagnostic.goto_next)
 
 -- disable default errors
 vim.diagnostic.config({
-	virtual_text = false,
+  virtual_text = false,
 })
 
 function leave_snippet()
-	if
-		((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
-		and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-		and not require("luasnip").session.jump_active
-	then
-		require("luasnip").unlink_current()
-	end
+  if
+      ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
+      and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+      and not require("luasnip").session.jump_active
+  then
+    require("luasnip").unlink_current()
+  end
 end
 
 -- stop snippets when you leave to normal mode
