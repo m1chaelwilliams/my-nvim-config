@@ -73,7 +73,6 @@ vim.keymap.set("n", "gr", function()
   vim.lsp.buf.references()
 
   vim.defer_fn(function()
-    print("getting qf list")
     -- Set up an autocmd to remap keys in the quickfix window
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "qf", -- Only apply this mapping in quickfix windows
@@ -86,11 +85,9 @@ vim.keymap.set("n", "gr", function()
           local current_idx = vim.fn.getqflist({ idx = 0 }).idx
           local qflist = vim.fn.getqflist() -- Get the current quickfix list
           if current_idx >= #qflist then
-            print("going to first element")
             vim.cmd("cfirst")
             vim.cmd("wincmd p")
           else
-            print("going to next item")
             vim.cmd("cnext")
             vim.cmd("wincmd p")
           end
@@ -99,11 +96,9 @@ vim.keymap.set("n", "gr", function()
         vim.keymap.set("n", "<S-Tab>", function()
           local current_idx = vim.fn.getqflist({ idx = 0 }).idx
           if current_idx < 2 then
-            print("going to first element")
             vim.cmd("clast")
             vim.cmd("wincmd p")
           else
-            print("going to next item")
             vim.cmd("cprev")
             vim.cmd("wincmd p")
           end
