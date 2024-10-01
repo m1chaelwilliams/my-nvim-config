@@ -6,6 +6,12 @@ vim.cmd("set cmdheight=0")
 vim.cmd("set termguicolors")
 vim.cmd("set scrolloff=5")
 
+-- window manips
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
+
 vim.cmd("set guicursor=n-v-c:block-blinkon1,i-ci:ver25")
 
 local utils = require("utils")
@@ -58,6 +64,53 @@ vim.keymap.set("n", "Y", "yy")
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+vim.keymap.set("n", "gr", function()
+	-- Trigger the LSP references function and populate the quickfix list
+	vim.lsp.buf.references()
+
+	vim.defer_fn(function()
+		print("getting qf list")
+		-- Set up an autocmd to remap keys in the quickfix window
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "qf", -- Only apply this mapping in quickfix windows
+			callback = function()
+				-- Remap <Enter> to jump to the location and close the quickfix window
+				vim.api.nvim_buf_set_keymap(0, "n", "<CR>", "<CR>:cclose<CR>", { noremap = true, silent = true })
+
+				-- Set up <Tab> to cycle through quickfix list entries
+				vim.keymap.set("n", "<Tab>", function()
+					local current_idx = vim.fn.getqflist({ idx = 0 }).idx
+					local qflist = vim.fn.getqflist() -- Get the current quickfix list
+					if current_idx >= #qflist then
+						print("going to first element")
+						vim.cmd("cfirst")
+						vim.cmd("wincmd p")
+					else
+						print("going to next item")
+						vim.cmd("cnext")
+						vim.cmd("wincmd p")
+					end
+				end, { noremap = true, silent = true, buffer = 0 })
+
+				vim.keymap.set("n", "<S-Tab>", function()
+					local current_idx = vim.fn.getqflist({ idx = 0 }).idx
+					if current_idx < 2 then
+						print("going to first element")
+						vim.cmd("clast")
+						vim.cmd("wincmd p")
+					else
+						print("going to next item")
+						vim.cmd("cprev")
+						vim.cmd("wincmd p")
+					end
+				end, { noremap = true, silent = true, buffer = 0 })
+			end,
+		})
+	end, 0)
+end)
+
+vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 
 -- see error
