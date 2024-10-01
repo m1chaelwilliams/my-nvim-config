@@ -79,6 +79,7 @@ vim.keymap.set("n", "gr", function()
       callback = function()
         -- Remap <Enter> to jump to the location and close the quickfix window
         vim.api.nvim_buf_set_keymap(0, "n", "<CR>", "<CR>:cclose<CR>", { noremap = true, silent = true })
+        vim.api.nvim_buf_set_keymap(0, "n", "q", ":cclose<CR>", { noremap = true, silent = true })
 
         -- Set up <Tab> to cycle through quickfix list entries
         vim.keymap.set("n", "<Tab>", function()
