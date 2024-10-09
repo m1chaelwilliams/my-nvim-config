@@ -1,9 +1,10 @@
 return {
   "iamcco/markdown-preview.nvim",
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  build = "cd app; sudo yarn install",
+  build = "cd app; yarn install",
   init = function()
     vim.g.mkdp_filetypes = { "markdown" }
+    vim.g.mkdp_browser = "/Applications/Brave Browser.app"
   end,
   ft = { "markdown" },
   config = function()

@@ -64,6 +64,9 @@ vim.keymap.set("n", "Y", "yy")
 vim.keymap.set("i", "<C-f>", "<C-x><C-f>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-l>", "<C-x><C-n>", { noremap = true, silent = true })
 
+-- spell check
+vim.keymap.set("n", "<leader>ll", ":setlocal spell spelllang=en_us<CR>")
+
 -- lsp setup
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
