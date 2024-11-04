@@ -34,6 +34,9 @@ return {
           "marksman",
           "sqlls",
           "wgsl_analyzer",
+          "texlab",
+          "intelephense",
+          "nim_langserver",
         },
       })
     end,
@@ -44,12 +47,23 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lspconfig = require("lspconfig")
+
+      lspconfig.sqlls.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.intelephense.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.texlab.setup({
+        capabilities = capabilities,
+      })
       lspconfig.zls.setup({
         capabilities = capabilities,
         cmd = { "zls" },
       })
       lspconfig.hls.setup({
         capabilities = capabilities,
+        single_file_support = true,
         -- on_attach = function()
         -- 	vim.cmd([[
         --     augroup LspFormatting
@@ -85,6 +99,7 @@ return {
         filetypes = {
           "templ",
           "html",
+          "php",
           "css",
           "javascriptreact",
           "typescriptreact",
@@ -104,6 +119,7 @@ return {
           "templ",
           "html",
           "css",
+          "php",
           "javascriptreact",
           "typescriptreact",
           "javascript",
@@ -148,6 +164,7 @@ return {
       if not configs.ts_ls then
         configs.ts_ls = {
           default_config = {
+            cmd = { "typescript-language-server", "--stdio" },
             capabilties = capabilities,
             filetypes = {
               "javascript",
@@ -156,6 +173,8 @@ return {
               "typescriptreact",
               "html",
             },
+            root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json", ".git"),
+            -- single_file_support = true,
           }
         }
       end
@@ -226,6 +245,9 @@ return {
         capabilties = capabilities,
       })
       lspconfig.gleam.setup({
+        capabilties = capabilities,
+      })
+      lspconfig.nim_langserver.setup({
         capabilties = capabilities,
       })
     end,
