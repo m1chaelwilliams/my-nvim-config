@@ -2,7 +2,7 @@
 
 A very simple Neovim configuration.
 
-_These preview are outdated, it looks better now_
+This preview is outdated, it looks better now\_
 ![preview](./assets/nvim-config.png)
 
 ## File Structure

@@ -53,10 +53,14 @@ function M.setup_colorscheme_overrides()
 					M.black_metal_theme_overrides()
 				end
 				M.my_line_colors()
-				vim.cmd("TransparentEnable")
+				vim.defer_fn(function()
+					vim.cmd("TransparentEnable")
+				end, 10)
 			elseif colorscheme == "zenburn" then
 				M.my_line_colors()
-				vim.cmd("TransparentDisable")
+				vim.defer_fn(function()
+					vim.cmd("TransparentDisable")
+				end, 10)
 			elseif colorscheme == "vague" then
 				M.vague_line_colors()
 				M.vague_status_colors()

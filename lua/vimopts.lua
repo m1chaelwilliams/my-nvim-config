@@ -8,17 +8,27 @@ vim.cmd("set scrolloff=5")
 vim.cmd("autocmd FileType sql setlocal noautoindent")
 vim.cmd("autocmd FileType sql setlocal nosmartindent")
 vim.cmd("autocmd FileType sql setlocal nocindent")
+vim.cmd("set signcolumn=no")
 
 vim.o.scrolloff = 5
 vim.opt.ignorecase = true
+
+-- minor visual changes to panes
+vim.opt.fillchars =
+	{ vert = " ", horiz = " ", horizup = " ", horizdown = " ", vertleft = " ", vertright = " ", verthoriz = " " }
 
 -- window manips
 vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
 vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
 vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
 vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
+-- vim.keymap.set("n", "<C-h>", "<C-w>h")
+-- vim.keymap.set("n", "<C-j>", "<C-w>j")
+-- vim.keymap.set("n", "<C-k>", "<C-w>k")
+-- vim.keymap.set("n", "<C-l>", "<C-w>l")
 
-vim.cmd("set guicursor=n-v-c:block-blinkon1,i-ci:ver25")
+-- vim.cmd("set guicursor=n-v-c:block-blinkon1,i-ci:ver25")
+vim.opt.guicursor = "n-v-c:block-blinkon1-CursorInsert,i:block-CursorInsert"
 
 local utils = require("utils")
 local os_name = utils.get_os()
@@ -33,7 +43,7 @@ vim.cmd("set shellquote=")
 vim.cmd("set shellxquote=")
 
 -- stop right-shift when errors/warning appear
-vim.o.signcolumn = "yes"
+-- vim.o.signcolumn = "yes"
 vim.o.completeopt = "menuone,noselect,preview"
 
 vim.opt.tabstop = 2
@@ -44,6 +54,7 @@ vim.bo.softtabstop = 2
 -- move selections
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Shift visual selected line down
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- Shift visual selected line up
+vim.keymap.set("n", "<leader>t", "bv~")
 
 -- colorscheme picker
 vim.keymap.set("n", "<C-n>", ":Telescope colorscheme<CR>")
@@ -131,9 +142,9 @@ vim.keymap.set("n", "[e", vim.diagnostic.goto_next)
 vim.keymap.set("n", "]e", vim.diagnostic.goto_next)
 
 -- disable default errors
-vim.diagnostic.config({
-	virtual_text = false,
-})
+-- vim.diagnostic.config({
+-- 	virtual_text = false,
+-- })
 
 function leave_snippet()
 	if
@@ -155,3 +166,5 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "help", "man" },
 	command = "wincmd L",
 })
+
+vim.lsp.set_log_level("warn")

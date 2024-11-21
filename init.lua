@@ -1,5 +1,10 @@
 local utils = require("utils")
 
+if vim.g.neovide then
+	vim.o.guifont = "Iosevka Nerd Font Mono:h20"
+	vim.g.neovide_transparency = 0.8
+end
+
 -- lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
