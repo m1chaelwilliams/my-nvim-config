@@ -12,6 +12,7 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
+					"nil_ls",
 					"lua_ls",
 					"rust_analyzer",
 					"gopls",
@@ -49,6 +50,9 @@ return {
 
 			local lspconfig = require("lspconfig")
 
+			lspconfig.nil_ls.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.sqlls.setup({
 				capabilities = capabilities,
 			})

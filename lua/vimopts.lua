@@ -168,3 +168,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.lsp.set_log_level("warn")
+
+vim.cmd([[
+autocmd! DiagnosticChanged * lua vim.diagnostic.setloclist({open = false}) ]])

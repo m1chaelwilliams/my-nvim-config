@@ -36,6 +36,7 @@ require("lazy").setup("plugins", {
 local config = require("nvim-treesitter.configs")
 config.setup({
 	ensure_installed = {
+		"nix",
 		"go",
 		"rust",
 		"c",
@@ -64,6 +65,7 @@ utils.color_overrides.setup_colorscheme_overrides()
 
 -- theme
 vim.cmd("colorscheme base16-black-metal-gorgoroth")
+-- vim.cmd("colorscheme zenburn")
 
 utils.fix_telescope_parens_win()
 utils.dashboard.setup_dashboard_image_colors()
