@@ -27,11 +27,10 @@ return {
 			require("telescope").load_extension("zoxide")
 			-- telescope setup
 			local builtin = require("telescope.builtin")
-			-- vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 
 			vim.keymap.set(
 				"n",
-				"<C-p>",
+				"<leader>jk",
 				"<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
 				{}
 			)

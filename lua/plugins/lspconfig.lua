@@ -171,6 +171,7 @@ return {
 				filetypes = { "templ" },
 			})
 			local configs = require("lspconfig.configs")
+
 			if not configs.ts_ls then
 				configs.ts_ls = {
 					default_config = {
@@ -213,6 +214,7 @@ return {
 				root_dir = require("lspconfig").util.root_pattern("src"),
 				init_option = { fallbackFlags = { "-std=c++2a" } },
 				capabilities = capabilities,
+				single_file_support = true,
 			})
 
 			function get_python_path()

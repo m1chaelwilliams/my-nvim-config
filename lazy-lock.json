@@ -41,5 +41,6 @@
   "vim-tmux-navigator": { "branch": "master", "commit": "424b5caa154bff34dc258ee53cec5a8e36cf7ea8" },
   "vimtex": { "branch": "master", "commit": "9a5ef1d4ac8e4e06071179ebe8121350fcb97861" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
-  "zen-mode.nvim": { "branch": "main", "commit": "29b292bdc58b76a6c8f294c961a8bf92c5a6ebd6" }
+  "zen-mode.nvim": { "branch": "main", "commit": "29b292bdc58b76a6c8f294c961a8bf92c5a6ebd6" },
+  "zk-nvim": { "branch": "main", "commit": "42dc341d897ac4da3d4a9c5c506a36153473f021" }
 }

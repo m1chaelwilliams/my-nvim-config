@@ -1,8 +1,5 @@
 return {
 	{
-		"archseer/colibri.vim",
-	},
-	{
 		"vague2k/vague.nvim",
 		config = function()
 			require("vague").setup({

@@ -26,10 +26,6 @@ vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window big
 vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
 vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
 vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
--- vim.keymap.set("n", "<C-h>", "<C-w>h")
--- vim.keymap.set("n", "<C-j>", "<C-w>j")
--- vim.keymap.set("n", "<C-k>", "<C-w>k")
--- vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- vim.cmd("set guicursor=n-v-c:block-blinkon1,i-ci:ver25")
 vim.opt.guicursor = "n-v-c:block-blinkon1-CursorInsert,i:block-CursorInsert"
@@ -170,3 +166,15 @@ vim.lsp.set_log_level("warn")
 
 vim.cmd([[
 autocmd! DiagnosticChanged * lua vim.diagnostic.setloclist({open = false}) ]])
+
+vim.api.nvim_create_augroup("CreateDirs", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = "CreateDirs",
+	pattern = "*",
+	callback = function()
+		local file_path = vim.fn.expand("<afile>:p:h")
+		if vim.fn.isdirectory(file_path) == 0 then
+			vim.fn.mkdir(file_path, "p")
+		end
+	end,
+})
