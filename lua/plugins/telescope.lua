@@ -31,7 +31,7 @@ return {
 
 			vim.keymap.set(
 				"n",
-				"<leader>jk",
+				"<C-p>",
 				"<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
 				{}
 			)

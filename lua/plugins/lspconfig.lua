@@ -69,17 +69,22 @@ return {
 			lspconfig.hls.setup({
 				capabilities = capabilities,
 				single_file_support = true,
-				-- on_attach = function()
-				-- 	vim.cmd([[
-				--     augroup LspFormatting
-				--       autocmd! * <buffer>
-				--       autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-				--     augroup END
-				--   ]])
-				-- end,
 			})
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" }, -- Recognize 'vim' as a global variable
+						},
+						workspace = {
+							library = vim.api.nvim_get_runtime_file("", true), -- Include Neovim runtime files
+						},
+						telemetry = {
+							enable = false,
+						},
+					},
+				},
 			})
 			lspconfig.wgsl_analyzer.setup({
 				capabilities = capabilities,
@@ -185,13 +190,6 @@ return {
 			end
 			lspconfig.ts_ls.setup({
 				-- capabilties = capabilities,
-				-- filetypes = {
-				--   "javascript",
-				--   "javascriptreact",
-				--   "typescript",
-				--   "typescriptreact",
-				--   "html",
-				-- },
 			})
 			lspconfig.eslint.setup({
 				capabilties = capabilities,
