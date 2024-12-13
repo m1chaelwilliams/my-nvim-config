@@ -18,10 +18,11 @@ return {
 				-- templ = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
-				-- markdown = { "prettier" },
+				markdown = { "prettier" },
 				gleam = { "gleam" },
 				-- sql = { "sqlfmt" },
 				asm = { "asmfmt" },
+				css = { "prettier", stop_after_first = true },
 			},
 			format_on_save = {
 				timeout_ms = 500,

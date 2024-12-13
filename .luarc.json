@@ -4,5 +4,8 @@
         "get_python_path",
         "listDiagnostics",
         "leave_snippet"
+    ],
+    "diagnostics.disable": [
+        "undefined-field"
     ]
 }

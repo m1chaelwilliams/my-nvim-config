@@ -1,14 +1,11 @@
 # My Nvim Config
 
-A very simple Neovim configuration.
+A bloated config with minimal flashiness.
 
-This preview is outdated, it looks better now\_
-![preview](./assets/nvim-config.png)
+![preview 1](assets/ss1.png)
+![preview 2](assets/ss2.png)
+![preview 3](assets/ss3.png)
 
-## File Structure
+## LIGHT MODE WARNING (I like to use zenburn for writing)
 
-All plugins are located in `/lua/plugins/`. **Lazy.nvim** automatically picks up on the directory and loads them.
-
-## Credit
-
-Very very special thanks to [typecraft](https://www.youtube.com/@typecraft_dev) for the amazing series on YouTube!
+![preview 4](assets/ss4.png)

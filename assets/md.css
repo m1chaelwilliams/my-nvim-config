@@ -1,45 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("/Users/michaelwilliams/Library/Fonts/IosevkaNerdFont-Regular.ttf");
+}
 
+body {
+  font-family: "MyCustomFont", monospace !important;
+}
 /*
- * github like style
- * https://github.com/iamcco/markdown.css/blob/master/dest/github/markdown.css
- */
+* github like style
+* https://github.com/iamcco/markdown.css/blob/master/dest/github/markdown.css
+*/
 
 main {
-  background-color: #080808;
+  /*background-color: #080808;*/
+  background: transparent;
+}
+
+body {
+  /*background-color: #080808;*/
+  background-color: white;
 }
 
 :root {
-    --color-text-primary: white;
-    --color-text-tertiary: #777;
-    --color-text-link: #bea3c7;
-    --color-bg-primary: #080808;
-    --color-bg-secondary: #fafbfc;
-    --color-bg-tertiary: #080808;
-    --color-border-primary: #ddd;
-    --color-border-secondary: #eaecef;
-    --color-border-tertiary: #d1d5da;
-    --color-kbd-foreground: #444d56;
-    --color-markdown-blockquote-border: #dfe2e5;
-    --color-markdown-table-border: #dfe2e5;
-    --color-markdown-table-tr-border: #c6cbd1;
-    --color-markdown-code-bg: #080808;
+  --color-text-primary: black;
+  --color-text-tertiary: #777;
+  --color-text-link: #bea3c7;
+  /*--color-bg-primary: #080808;*/
+  --color-bg-primary: white;
+  --color-bg-secondary: #fafbfc;
+  --color-bg-tertiary: #080808;
+  --color-border-primary: #ddd;
+  --color-border-secondary: #eaecef;
+  --color-border-tertiary: #d1d5da;
+  --color-kbd-foreground: #444d56;
+  --color-markdown-blockquote-border: #dfe2e5;
+  --color-markdown-table-border: #dfe2e5;
+  --color-markdown-table-tr-border: #c6cbd1;
+  --color-markdown-code-bg: #080808;
 }
 /* [data-theme="dark"] { */
-/*     --color-text-primary: #c9d1d9; */
-/*     --color-text-tertiary: #8b949e; */
-/*     --color-text-link: #58a6ff; */
-/*     --color-bg-primary: #0d1117; */
-/*     --color-bg-secondary: #0d1117; */
-/*     --color-bg-tertiary: #161b22; */
-/*     --color-border-primary: #30363d; */
-/*     --color-border-secondary: #21262d; */
-/*     --color-border-tertiary: #6e7681; */
-/*     --color-kbd-foreground: #b1bac4; */
-/*     --color-markdown-blockquote-border: #3b434b; */
-/*     --color-markdown-table-border: none; */
-/*     --color-markdown-table-tr-border: #272c32; */
-/*     --color-markdown-code-bg: #080808; */
+/* --color-text-primary: #c9d1d9; */
+/* --color-text-tertiary: #8b949e; */
+/* --color-text-link: #58a6ff; */
+/* --color-bg-primary: #0d1117; */
+/* --color-bg-secondary: #0d1117; */
+/* --color-bg-tertiary: #161b22; */
+/* --color-border-primary: #30363d; */
+/* --color-border-secondary: #21262d; */
+/* --color-border-tertiary: #6e7681; */
+/* --color-kbd-foreground: #b1bac4; */
+/* --color-markdown-blockquote-border: #3b434b; */
+/* --color-markdown-table-border: none; */
+/* --color-markdown-table-tr-border: #272c32; */
+/* --color-markdown-code-bg: #080808; */
 /* } */
 
 .markdown-body ol ol,
@@ -54,14 +67,16 @@ main {
   margin-bottom: 0;
 }
 .markdown-body {
-  /* font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
-  font-family: 'JetBrains Mono';
-  font-size: 16px;
+  min-height: 100vh;
+  /* font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI
+Emoji", "Segoe UI Symbol"; */
+  /*font-family: "JetBrains Mono";*/
+  /*font-size: 16px;*/
   color: var(--color-text-primary);
   line-height: 1.6;
   word-wrap: break-word;
   padding: 45px;
-  background: var(--color-bg-primary);
+  /*background: var(--color-bg-primary);*/
   /* border: 1px solid var(--color-border-primary); */
   -webkit-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
@@ -178,7 +193,7 @@ main {
   list-style-type: disc;
 }
 .markdown-body dl {
-  margin-bottom: 1.3em
+  margin-bottom: 1.3em;
 }
 .markdown-body dl dt {
   font-weight: 700;
@@ -221,7 +236,12 @@ main {
 .markdown-body kbd {
   display: inline-block;
   padding: 5px 6px;
-  font: 14px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  /*font:*/
+  /*  14px SFMono-Regular,*/
+  /*  Consolas,*/
+  /*  Liberation Mono,*/
+  /*  Menlo,*/
+  /*  monospace;*/
   line-height: 10px;
   /* color: var(--color-kbd-foreground); */
   vertical-align: middle;
@@ -236,7 +256,7 @@ main {
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: var(--color-bg-tertiary);
+  /*background-color: var(--color-bg-tertiary);*/
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
@@ -297,7 +317,18 @@ main {
   list-style-type: none;
 }
 .task-list-item input {
-  font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font:
+    13px/1.4 Helvetica,
+    arial,
+    nimbussansl,
+    liberationsans,
+    freesans,
+    clean,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe
+UI Emoji",
+    "Segoe UI Symbol";
   margin: 0 0.35em 0.25em -1.6em;
   vertical-align: middle;
 }
@@ -317,5 +348,8 @@ main {
   padding: 0;
 }
 
-/* code coloring */
+#page-header {
+  display: none;
+}
 
+/* code coloring */

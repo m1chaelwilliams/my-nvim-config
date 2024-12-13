@@ -1,10 +1,10 @@
-
 .hljs {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
   color: var(--color-text-primary);
-  background: #080808;
+  /*background: #080808;*/
+  background: white;
 }
 
 .hljs-comment,

@@ -11,6 +11,14 @@ local function get_date()
 end
 
 return {
+
+	-- latex
+	s("$", {
+		t({ "$$", "" }),
+		i(1, ""),
+		t({ "", "$$" }),
+	}),
+
 	-- math plain text snippets
 	s("lam", t("λ")),
 	s("lsm", t("∃")),

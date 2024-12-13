@@ -31,6 +31,7 @@ local config = require("nvim-treesitter.configs")
 config.setup({
 	ensure_installed = {
 		"nix",
+		"vimdoc",
 		"go",
 		"rust",
 		"c",
@@ -47,9 +48,12 @@ config.setup({
 		"wgsl",
 		"php",
 		"nim",
+		"sql",
+		"markdown",
+		"latex",
 	},
 	-- sql being slow on large files :(
-	highlight = { enable = true, disable = { "sql" } },
+	highlight = { enable = true },
 	indent = { enable = true },
 	modules = {},
 	sync_install = true,

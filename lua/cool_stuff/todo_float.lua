@@ -60,19 +60,26 @@ local function open_floating_file(filepath)
 	})
 end
 
-local function setup_user_commands()
+local function setup_user_commands(opts)
+	local target_file = opts.target_file or "todo.md"
+	local resolved_target_file = vim.fn.resolve(target_file)
+
+	if vim.fn.filereadable(resolved_target_file) == true then
+		opts.target_file = resolved_target_file
+	else
+		opts.target_file = opts.global_file
+	end
 	vim.api.nvim_create_user_command("Td", function()
-		local path = "~/notes/todo.md"
-		open_floating_file(path)
+		open_floating_file(opts.target_file)
 	end, {})
 end
 
 local function setup_keymaps()
-	vim.keymap.set("n", "<leader>td", ":Td<CR>", {})
+	vim.keymap.set("n", "<leader>td", ":Td<CR>", { silent = true })
 end
 
-M.setup = function()
-	setup_user_commands()
+M.setup = function(opts)
+	setup_user_commands(opts)
 	setup_keymaps()
 end
 

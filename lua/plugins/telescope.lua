@@ -3,9 +3,23 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+			},
+		},
 		config = function()
 			require("telescope").setup({
+				extensions = {
+					fzf = {
+						fuzzy = true, -- false will only do exact matching
+						override_generic_sorter = true, -- override the generic sorter
+						override_file_sorter = true, -- override the file sorter
+						case_mode = "smart_case",
+					},
+				},
 				pickers = {
 					colorscheme = {
 						enable_preview = true,
@@ -24,6 +38,7 @@ return {
 				},
 			})
 
+			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("zoxide")
 			-- telescope setup
 			local builtin = require("telescope.builtin")
@@ -40,6 +55,7 @@ return {
 			vim.keymap.set("n", "<leader>ds", builtin.lsp_document_symbols, {})
 			vim.keymap.set("n", "<leader>ws", builtin.lsp_workspace_symbols, {})
 			vim.keymap.set("n", "<leader>fz", ":Telescope zoxide list<CR>", {})
+			vim.keymap.set("n", "<leader>fv", builtin.help_tags, {})
 		end,
 	},
 	{

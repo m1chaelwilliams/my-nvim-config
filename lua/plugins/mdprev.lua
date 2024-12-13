@@ -11,7 +11,7 @@ return {
 		vim.keymap.set("n", "<leader>mdn", ":MarkdownPreview<CR>")
 		vim.keymap.set("n", "<leader>mds", ":MarkdownPreviewStop<CR>")
 
-		vim.g.mkdp_markdown_css = "$XDG_HOME/.config/nvim/assets/md.css"
-		vim.g.mkdp_highlight_css = "$XDG_HOME/.config/nvim/assets/mdhl.css"
+		vim.g.mkdp_markdown_css = "/Users/michaelwilliams/dotfiles/.config/nvim/assets/md.css"
+		vim.g.mkdp_highlight_css = "/Users/michaelwilliams/dotfiles/.config/nvim/assets/mdhl.css"
 	end,
 }
