@@ -13,6 +13,7 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"nil_ls",
+					"bashls",
 					"lua_ls",
 					"rust_analyzer",
 					"gopls",
@@ -69,6 +70,9 @@ return {
 			lspconfig.hls.setup({
 				capabilities = capabilities,
 				single_file_support = true,
+			})
+			lspconfig.bashls.setup({
+				capabilities = capabilities,
 			})
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,

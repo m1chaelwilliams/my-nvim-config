@@ -30,6 +30,10 @@ vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window s
 -- vim.cmd("set guicursor=n-v-c:block-blinkon1,i-ci:ver25")
 vim.opt.guicursor = "n-v-c:block-blinkon1-CursorInsert,i:block-CursorInsert"
 
+vim.api.nvim_create_user_command("Setwd", function()
+	vim.cmd("cd " .. vim.fn.expand("%:p:h"))
+end, {})
+
 local utils = require("utils")
 local os_name = utils.get_os()
 
@@ -177,4 +181,21 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			vim.fn.mkdir(file_path, "p")
 		end
 	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "*.md" },
+	callback = function()
+		vim.cmd("set linebreak")
+		vim.cmd("colorscheme zenburn")
+	end,
+	nested = true,
+})
+
+vim.api.nvim_create_autocmd("BufLeave", {
+	pattern = { "*.md" },
+	callback = function()
+		vim.cmd("colorscheme base16-black-metal-gorgoroth")
+	end,
+	nested = true,
 })

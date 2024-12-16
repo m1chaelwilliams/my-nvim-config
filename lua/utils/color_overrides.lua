@@ -45,6 +45,8 @@ end
 -- sets up custom colors dependent on themes
 function M.setup_colorscheme_overrides()
 	vim.api.nvim_create_autocmd("ColorScheme", {
+		-- so it's fired when used in other autocmds
+		nested = true,
 		pattern = "*",
 		callback = function()
 			local colorscheme = vim.g.colors_name

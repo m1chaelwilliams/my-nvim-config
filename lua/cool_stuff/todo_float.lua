@@ -38,6 +38,7 @@ local function open_floating_file(filepath)
 	end
 
 	local win = vim.api.nvim_open_win(buf, true, float_win_config())
+	vim.cmd("setlocal nospell")
 
 	vim.api.nvim_buf_set_keymap(buf, "n", "q", "", {
 		noremap = true,
@@ -72,10 +73,14 @@ local function setup_user_commands(opts)
 	vim.api.nvim_create_user_command("Td", function()
 		open_floating_file(opts.target_file)
 	end, {})
+	vim.api.nvim_create_user_command("Ti", function()
+		open_floating_file("~/notes/ideas.md")
+	end, {})
 end
 
 local function setup_keymaps()
 	vim.keymap.set("n", "<leader>td", ":Td<CR>", { silent = true })
+	vim.keymap.set("n", "<leader>ti", ":Ti<CR>", { silent = true })
 end
 
 M.setup = function(opts)
