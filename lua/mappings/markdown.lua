@@ -34,6 +34,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = "MarkdownKeymaps",
 	pattern = "Markdown",
 	callback = function()
-		vim.keymap.set("n", "<CR>", toggle_todo, { silent = true })
+		vim.keymap.set("n", "<leader>a", toggle_todo, { silent = true })
 	end,
 })

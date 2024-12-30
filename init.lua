@@ -26,11 +26,15 @@ require("lazy").setup("plugins", {
 	},
 })
 
+vim.filetype.add({ extension = { templ = "templ" } })
+vim.filetype.add({ extension = { nim = "nim" }, filename = { ["Nim"] = "nim" } })
+
 -- treesitter config
 local config = require("nvim-treesitter.configs")
 config.setup({
 	ensure_installed = {
 		"nix",
+		"nim",
 		"vimdoc",
 		"go",
 		"rust",
@@ -53,11 +57,13 @@ config.setup({
 		"latex",
 	},
 	-- sql being slow on large files :(
-	highlight = { enable = true },
+	highlight = {
+		enable = true,
+	},
 	indent = { enable = true },
 	modules = {},
 	sync_install = true,
-	auto_install = false,
+	auto_install = true,
 	ignore_install = {},
 })
 
